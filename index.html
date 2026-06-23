@@ -4,1380 +4,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Portfólio de Pedro Lysakovski — Desenvolvedor Full Stack na Y4 Solutions. Especialista em soluções web acessíveis e de alta performance.">
+  <meta property="og:title" content="Pedro Lysakovski · Full Stack Developer">
+  <meta property="og:description" content="Código limpo, performance e impacto real.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://via.placeholder.com/1200x630/0A0A0F/C8FF00?text=Pedro+Lysakovski">
+
   <title>Pedro Lysakovski — Full Stack Developer</title>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
     rel="stylesheet">
-  <style>
-    /* ============================================================
-   RESET & TOKENS
-   ============================================================ */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
 
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    :root {
-      --ink: #0A0A0F;
-      --ink2: #13131A;
-      --ink3: #1C1C26;
-      --surface: #F4F3EF;
-      --surface2: #ECEAE3;
-      --lime: #C8FF00;
-      --lime2: #AADC00;
-      --blue: #0047FF;
-      --blue2: #002BB0;
-      --muted: #888880;
-      --muted2: #555550;
-      --white: #FAFAF8;
-
-      --f-display: 'Syne', sans-serif;
-      --f-mono: 'DM Mono', monospace;
-      --f-body: 'DM Sans', sans-serif;
-
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
-    }
-
-    body {
-      font-family: var(--f-body);
-      background: var(--ink);
-      color: var(--white);
-      overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* ============================================================
-   CUSTOM CURSOR
-   ============================================================ */
-    .cursor {
-      position: fixed;
-      z-index: 9999;
-      pointer-events: none;
-      mix-blend-mode: difference;
-    }
-
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--lime);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s;
-    }
-
-    .cursor-ring {
-      width: 36px;
-      height: 36px;
-      border: 1px solid rgba(200, 255, 0, 0.5);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: all 0.18s var(--ease-out-expo);
-    }
-
-    .cursor-ring.hover {
-      width: 60px;
-      height: 60px;
-      background: rgba(200, 255, 0, 0.08);
-      border-color: var(--lime);
-    }
-
-    /* ============================================================
-   SCROLLBAR
-   ============================================================ */
-    ::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--ink);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--lime);
-      border-radius: 2px;
-    }
-
-    /* ============================================================
-   NOISE OVERLAY
-   ============================================================ */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 9998;
-      pointer-events: none;
-      opacity: 0.022;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 180px;
-    }
-
-    /* ============================================================
-   NAV
-   ============================================================ */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.5rem 3rem;
-      mix-blend-mode: normal;
-    }
-
-    nav::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95) 0%, transparent 100%);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .nav-logo {
-      font-family: var(--f-display);
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      text-decoration: none;
-    }
-
-    .nav-logo em {
-      font-style: normal;
-      color: var(--lime);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.25rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--f-mono);
-      font-size: 0.72rem;
-      font-weight: 400;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 0.4rem 0.85rem;
-      border-radius: 100px;
-      transition: color 0.2s, background 0.2s;
-      letter-spacing: 0.04em;
-    }
-
-    .nav-links a:hover {
-      color: var(--white);
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .nav-cta {
-      font-family: var(--f-mono);
-      font-size: 0.72rem;
-      font-weight: 500;
-      padding: 0.55rem 1.25rem;
-      background: var(--lime);
-      color: var(--ink);
-      border: none;
-      border-radius: 100px;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: background 0.2s, transform 0.15s;
-      cursor: none;
-    }
-
-    .nav-cta:hover {
-      background: var(--lime2);
-      transform: scale(1.03);
-    }
-
-    /* ============================================================
-   HERO
-   ============================================================ */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 3rem 5rem;
-      overflow: hidden;
-    }
-
-    /* Ambient glow blobs */
-    .hero-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .blob-lime {
-      width: 500px;
-      height: 500px;
-      background: rgba(200, 255, 0, 0.07);
-      top: -80px;
-      right: 10%;
-      animation: blobFloat 8s ease-in-out infinite;
-    }
-
-    .blob-blue {
-      width: 380px;
-      height: 380px;
-      background: rgba(0, 71, 255, 0.1);
-      bottom: 10%;
-      left: -60px;
-      animation: blobFloat 11s ease-in-out infinite reverse;
-    }
-
-    @keyframes blobFloat {
-
-      0%,
-      100% {
-        transform: translateY(0) scale(1);
-      }
-
-      50% {
-        transform: translateY(-30px) scale(1.05);
-      }
-    }
-
-    /* Grid bg */
-    .hero-grid-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-    }
-
-    /* Large background number */
-    .hero-bg-num {
-      position: absolute;
-      right: -2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: var(--f-display);
-      font-size: clamp(18rem, 28vw, 32rem);
-      font-weight: 800;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.04);
-      line-height: 1;
-      pointer-events: none;
-      z-index: 0;
-      user-select: none;
-      letter-spacing: -0.05em;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s var(--ease-out-expo) 0.2s forwards;
-    }
-
-    .hero-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--f-mono);
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .hero-badge::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--lime);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        box-shadow: 0 0 0 0 rgba(200, 255, 0, 0.4);
-      }
-
-      50% {
-        opacity: 0.7;
-        box-shadow: 0 0 0 6px rgba(200, 255, 0, 0);
-      }
-    }
-
-    .hero h1 {
-      font-family: var(--f-display);
-      font-size: clamp(4rem, 9vw, 9.5rem);
-      font-weight: 800;
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.9s var(--ease-out-expo) 0.35s forwards;
-    }
-
-    .hero h1 .line2 {
-      display: block;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
-    }
-
-    .hero h1 .accent {
-      color: var(--lime);
-    }
-
-    .hero-footer {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.9s var(--ease-out-expo) 0.55s forwards;
-    }
-
-    .hero-desc {
-      max-width: 420px;
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.8;
-      font-weight: 300;
-    }
-
-    .hero-desc strong {
-      color: var(--white);
-      font-weight: 500;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 0.75rem;
-      flex-shrink: 0;
-    }
-
-    .btn-lime {
-      font-family: var(--f-mono);
-      font-size: 0.78rem;
-      font-weight: 500;
-      padding: 0.8rem 1.75rem;
-      background: var(--lime);
-      color: var(--ink);
-      border: none;
-      border-radius: 4px;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: background 0.2s, transform 0.15s;
-      cursor: none;
-    }
-
-    .btn-lime:hover {
-      background: var(--lime2);
-      transform: translateY(-2px);
-    }
-
-    .btn-ghost {
-      font-family: var(--f-mono);
-      font-size: 0.78rem;
-      font-weight: 400;
-      padding: 0.8rem 1.75rem;
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 4px;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: color 0.2s, border-color 0.2s, transform 0.15s;
-      cursor: none;
-    }
-
-    .btn-ghost:hover {
-      color: var(--white);
-      border-color: rgba(255, 255, 255, 0.35);
-      transform: translateY(-2px);
-    }
-
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      animation: fadeIn 1s ease 1.2s forwards;
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, rgba(200, 255, 0, 0.6), transparent);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollLine {
-      0% {
-        transform: scaleY(0);
-        transform-origin: top;
-      }
-
-      50% {
-        transform: scaleY(1);
-        transform-origin: top;
-      }
-
-      51% {
-        transform: scaleY(1);
-        transform-origin: bottom;
-      }
-
-      100% {
-        transform: scaleY(0);
-        transform-origin: bottom;
-      }
-    }
-
-    .scroll-label {
-      font-family: var(--f-mono);
-      font-size: 0.6rem;
-      color: var(--muted);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      writing-mode: vertical-rl;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* ============================================================
-   MARQUEE STRIP
-   ============================================================ */
-    .marquee-strip {
-      background: var(--lime);
-      padding: 0.85rem 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .marquee-inner {
-      display: inline-flex;
-      gap: 0;
-      animation: marquee 20s linear infinite;
-    }
-
-    .marquee-inner span {
-      font-family: var(--f-mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--ink);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0 2rem;
-    }
-
-    .marquee-inner span::after {
-      content: '✦';
-      margin-left: 2rem;
-      opacity: 0.4;
-    }
-
-    @keyframes marquee {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* ============================================================
-   SECTION BASE
-   ============================================================ */
-    .section {
-      padding: 8rem 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-full {
-      padding: 8rem 3rem;
-    }
-
-    .section-full .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .eyebrow {
-      font-family: var(--f-mono);
-      font-size: 0.68rem;
-      color: var(--lime);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .eyebrow::before {
-      content: '';
-      width: 1.5rem;
-      height: 1px;
-      background: var(--lime);
-    }
-
-    .section-heading {
-      font-family: var(--f-display);
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 4rem;
-    }
-
-    /* ============================================================
-   ABOUT
-   ============================================================ */
-    .about-layout {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .about-big-text {
-      font-family: var(--f-display);
-      font-size: clamp(1.5rem, 2.5vw, 2.1rem);
-      font-weight: 600;
-      line-height: 1.4;
-      letter-spacing: -0.025em;
-      color: var(--white);
-      margin-bottom: 2rem;
-    }
-
-    .about-big-text .hl {
-      color: var(--lime);
-    }
-
-    .about-body {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.85;
-      font-weight: 300;
-      margin-bottom: 1.25rem;
-    }
-
-    .about-body strong {
-      color: var(--white);
-      font-weight: 500;
-    }
-
-    /* Info terminal card */
-    .terminal-card {
-      background: var(--ink2);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .terminal-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.9rem 1.25rem;
-      background: var(--ink3);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .terminal-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .dot-r {
-      background: #FF5F57;
-    }
-
-    .dot-y {
-      background: #FEBC2E;
-    }
-
-    .dot-g {
-      background: #28C840;
-    }
-
-    .terminal-title {
-      font-family: var(--f-mono);
-      font-size: 0.68rem;
-      color: var(--muted2);
-      margin-left: 0.5rem;
-      letter-spacing: 0.05em;
-    }
-
-    .terminal-body {
-      padding: 1.5rem;
-      font-family: var(--f-mono);
-      font-size: 0.8rem;
-      line-height: 2;
-    }
-
-    .t-key {
-      color: var(--muted);
-    }
-
-    .t-str {
-      color: #98E08C;
-    }
-
-    .t-num {
-      color: #FFC66D;
-    }
-
-    .t-bool {
-      color: #9CDCFE;
-    }
-
-    .t-brace {
-      color: rgba(255, 255, 255, 0.25);
-    }
-
-    .t-avail {
-      color: var(--lime);
-    }
-
-    .t-comment {
-      color: rgba(255, 255, 255, 0.2);
-      font-style: italic;
-    }
-
-    /* ============================================================
-   SKILLS
-   ============================================================ */
-    .skills-bg {
-      background: var(--ink2);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .skill-block {
-      background: var(--ink2);
-      padding: 2rem 1.75rem;
-      transition: background 0.25s;
-    }
-
-    .skill-block:hover {
-      background: var(--ink3);
-    }
-
-    .skill-block-icon {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .skill-block-label {
-      font-family: var(--f-mono);
-      font-size: 0.65rem;
-      color: var(--lime);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-
-    .skill-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .pill {
-      font-family: var(--f-mono);
-      font-size: 0.7rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 2px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.55);
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .skill-block:hover .pill {
-      color: rgba(255, 255, 255, 0.75);
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-
-    .pill.new {
-      border-color: rgba(0, 71, 255, 0.35);
-      color: #7AADFF;
-      background: rgba(0, 71, 255, 0.06);
-    }
-
-    /* ============================================================
-   PROJECTS
-   ============================================================ */
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .project-row {
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      align-items: center;
-      gap: 2rem;
-      padding: 2.5rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      text-decoration: none;
-      transition: padding-left 0.3s var(--ease-out-expo);
-      cursor: none;
-      position: relative;
-    }
-
-    .project-row::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--lime);
-      transition: width 0.4s var(--ease-out-expo);
-    }
-
-    .project-row:hover {
-      padding-left: 1.5rem;
-    }
-
-    .project-row:hover::after {
-      width: 100%;
-    }
-
-    .project-row:first-child {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .proj-num {
-      font-family: var(--f-mono);
-      font-size: 0.72rem;
-      color: var(--muted2);
-      letter-spacing: 0.05em;
-    }
-
-    .proj-main {
-      min-width: 0;
-    }
-
-    .proj-title {
-      font-family: var(--f-display);
-      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: -0.03em;
-      margin-bottom: 0.4rem;
-      transition: color 0.2s;
-    }
-
-    .project-row:hover .proj-title {
-      color: var(--lime);
-    }
-
-    .proj-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.6;
-      max-width: 600px;
-    }
-
-    .proj-tags {
-      display: flex;
-      gap: 0.4rem;
-      margin-top: 0.75rem;
-    }
-
-    .proj-tag {
-      font-family: var(--f-mono);
-      font-size: 0.62rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 2px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--muted2);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .proj-arrow {
-      font-size: 1.5rem;
-      color: var(--muted2);
-      transition: color 0.2s, transform 0.3s var(--ease-out-expo);
-      flex-shrink: 0;
-    }
-
-    .project-row:hover .proj-arrow {
-      color: var(--lime);
-      transform: translate(4px, -4px);
-    }
-
-    /* ============================================================
-   EXPERIENCE / TIMELINE
-   ============================================================ */
-    .exp-bg {
-      background: linear-gradient(180deg, var(--ink) 0%, var(--ink2) 50%, var(--ink) 100%);
-    }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: 200px 1px 1fr;
-      gap: 0 3rem;
-      position: relative;
-    }
-
-    .timeline-track {
-      background: linear-gradient(to bottom, var(--lime), rgba(200, 255, 0, 0.1) 80%, transparent);
-      position: relative;
-      border-radius: 2px;
-    }
-
-    .timeline-items {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .timeline-item {
-      display: contents;
-    }
-
-    .exp-date-col {
-      padding: 0 0 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding-top: 0.25rem;
-    }
-
-    .exp-date {
-      font-family: var(--f-mono);
-      font-size: 0.7rem;
-      color: var(--lime);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      line-height: 1.4;
-    }
-
-    .exp-type {
-      font-family: var(--f-mono);
-      font-size: 0.62rem;
-      color: var(--muted2);
-      margin-top: 0.25rem;
-      letter-spacing: 0.06em;
-    }
-
-    .timeline-dot-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 0.3rem;
-    }
-
-    .t-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--lime);
-      border: 2px solid var(--ink);
-      flex-shrink: 0;
-      box-shadow: 0 0 0 4px rgba(200, 255, 0, 0.12);
-    }
-
-    .exp-content-col {
-      padding: 0 0 4rem;
-    }
-
-    .exp-role {
-      font-family: var(--f-display);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: -0.025em;
-      margin-bottom: 0.25rem;
-    }
-
-    .exp-org {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      font-weight: 300;
-    }
-
-    .exp-org strong {
-      color: rgba(255, 255, 255, 0.65);
-      font-weight: 400;
-    }
-
-    .exp-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .exp-bullets li {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.65;
-      font-weight: 300;
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .exp-bullets li::before {
-      content: '—';
-      color: var(--lime);
-      flex-shrink: 0;
-      font-family: var(--f-mono);
-    }
-
-    /* ============================================================
-   CERTIFICATES
-   ============================================================ */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .cert-item {
-      background: var(--ink2);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      transition: border-color 0.2s, transform 0.2s var(--ease-out-expo);
-      cursor: none;
-    }
-
-    .cert-item:hover {
-      border-color: rgba(200, 255, 0, 0.3);
-      transform: translateY(-3px);
-    }
-
-    .cert-issuer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .cert-issuer-badge {
-      font-family: var(--f-mono);
-      font-size: 0.62rem;
-      color: var(--lime);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: rgba(200, 255, 0, 0.08);
-      border: 1px solid rgba(200, 255, 0, 0.15);
-      padding: 0.2rem 0.5rem;
-      border-radius: 2px;
-    }
-
-    .cert-year {
-      font-family: var(--f-mono);
-      font-size: 0.65rem;
-      color: var(--muted2);
-    }
-
-    .cert-name {
-      font-family: var(--f-display);
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-    }
-
-    .cert-arrow {
-      font-family: var(--f-mono);
-      font-size: 0.65rem;
-      color: var(--muted2);
-      letter-spacing: 0.08em;
-      margin-top: auto;
-      transition: color 0.2s;
-    }
-
-    .cert-item:hover .cert-arrow {
-      color: var(--lime);
-    }
-
-    /* ============================================================
-   CONTACT
-   ============================================================ */
-    .contact-bg {
-      background: var(--ink2);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: start;
-    }
-
-    .contact-heading {
-      font-family: var(--f-display);
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-heading .outline {
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35);
-    }
-
-    .contact-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.8;
-      font-weight: 300;
-      margin-bottom: 2.5rem;
-    }
-
-    .social-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .social-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-decoration: none;
-      padding: 1rem 1.25rem;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 6px;
-      transition: border-color 0.2s, background 0.2s;
-      cursor: none;
-    }
-
-    .social-item:hover {
-      border-color: rgba(200, 255, 0, 0.25);
-      background: rgba(200, 255, 0, 0.03);
-    }
-
-    .social-code {
-      font-family: var(--f-mono);
-      font-size: 0.65rem;
-      color: var(--lime);
-      letter-spacing: 0.1em;
-      width: 2.5rem;
-      flex-shrink: 0;
-    }
-
-    .social-handle {
-      font-size: 0.875rem;
-      color: var(--muted);
-      font-weight: 400;
-      transition: color 0.2s;
-    }
-
-    .social-item:hover .social-handle {
-      color: var(--white);
-    }
-
-    .social-ext {
-      margin-left: auto;
-      font-size: 0.8rem;
-      color: var(--muted2);
-      transition: color 0.2s;
-    }
-
-    .social-item:hover .social-ext {
-      color: var(--lime);
-    }
-
-    /* Form */
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .field-label {
-      display: block;
-      font-family: var(--f-mono);
-      font-size: 0.65rem;
-      color: var(--lime);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .field-input {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 6px;
-      padding: 0.875rem 1rem;
-      color: var(--white);
-      font-family: var(--f-body);
-      font-size: 0.9rem;
-      font-weight: 300;
-      outline: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .field-input::placeholder {
-      color: var(--muted2);
-    }
-
-    .field-input:focus {
-      border-color: rgba(200, 255, 0, 0.4);
-      background: rgba(200, 255, 0, 0.02);
-    }
-
-    textarea.field-input {
-      resize: vertical;
-      min-height: 130px;
-      line-height: 1.6;
-    }
-
-    /* ============================================================
-   FOOTER
-   ============================================================ */
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 2rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .footer-logo {
-      font-family: var(--f-display);
-      font-size: 0.9rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -0.02em;
-    }
-
-    .footer-logo em {
-      font-style: normal;
-      color: var(--lime);
-    }
-
-    .footer-copy {
-      font-family: var(--f-mono);
-      font-size: 0.65rem;
-      color: var(--muted2);
-      letter-spacing: 0.06em;
-    }
-
-    /* ============================================================
-   REVEAL ANIMATION
-   ============================================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ============================================================
-   RESPONSIVE
-   ============================================================ */
-    @media (max-width: 900px) {
-      nav {
-        padding: 1.25rem 1.5rem;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding: 0 1.5rem 4rem;
-      }
-
-      .section {
-        padding: 5rem 1.5rem;
-      }
-
-      .section-full {
-        padding: 5rem 1.5rem;
-      }
-
-      .about-layout {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .project-row {
-        grid-template-columns: 60px 1fr auto;
-        gap: 1rem;
-      }
-
-      .timeline {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .timeline-track {
-        display: none;
-      }
-
-      .exp-date-col {
-        padding-bottom: 0.25rem;
-      }
-
-      .exp-content-col {
-        padding-bottom: 3rem;
-      }
-
-      .certs-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .contact-layout {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      footer {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 580px) {
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .certs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 3.5rem;
-      }
-
-      .hero-footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero-bg-num {
-        font-size: 14rem;
-        right: -1rem;
-      }
-    }
-  </style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- CURSOR -->
-  <div class="cursor" id="cursorDot" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;">
+  <!-- CURSOR (ativado apenas para dispositivos com mouse) -->
+  <div class="cursor" id="cursorDot" style="position:fixed; top:0; left:0; pointer-events:none; z-index:9999;">
     <div class="cursor-dot"></div>
   </div>
-  <div class="cursor" id="cursorRing" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9998;">
+  <div class="cursor" id="cursorRing" style="position:fixed; top:0; left:0; pointer-events:none; z-index:9998;">
     <div class="cursor-ring" id="ringEl"></div>
   </div>
 
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">Pedro<em>.</em></a>
-    <ul class="nav-links">
+
+    <!-- Menu Hamburguer (Mobile) -->
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <ul class="nav-links" id="navMenu">
       <li><a href="#about">sobre</a></li>
       <li><a href="#skills">skills</a></li>
       <li><a href="#projects">projetos</a></li>
       <li><a href="#experience">experiência</a></li>
       <li><a href="#contact">contato</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">disponível ↗</a>
+    <a href="#contact" class="nav-cta">fale comigo ↗</a>
   </nav>
 
   <!-- HERO -->
@@ -1389,7 +64,11 @@
 
     <div class="hero-content">
       <div class="hero-eyebrow">
-        <div class="hero-badge">disponível para oportunidades — RS, Brasil</div>
+        <div class="hero-badge">Full Stack Developer</div>
+        <div class="hero-company-chip">
+          <span class="chip-dot"></span>
+          Atualmente na Y4
+        </div>
       </div>
 
       <h1>
@@ -1399,9 +78,10 @@
 
       <div class="hero-footer">
         <p class="hero-desc">
-          Desenvolvedor <strong>Full Stack</strong> na Y4 solutions.
+          Desenvolvedor Full Stack na <strong>Y4 Solutions</strong>, formado em Técnico em Informática pelo IFRS campus
+          Osório.
           Construo experiências digitais completas — da lógica do servidor à interface que as pessoas amam usar.
-          Foco em <strong>código limpo, acessibilidade e impacto real</strong>.
+          Foco em <strong>código limpo, performance e impacto real</strong>.
         </p>
         <div class="hero-btns">
           <a href="#projects" class="btn-lime">ver projetos →</a>
@@ -1421,11 +101,11 @@
     <div class="marquee-inner">
       <span>Full Stack Developer</span><span>HTML · CSS · JavaScript</span>
       <span>Java · POO</span><span>PostgreSQL · SQL</span>
-      <span>REACT</span><span>NEXT.JS</span>
+      <span>Y4 Solutions</span><span>Acessibilidade Digital</span>
       <span>Git · GitHub</span><span>Design Responsivo</span>
       <span>Full Stack Developer</span><span>HTML · CSS · JavaScript</span>
       <span>Java · POO</span><span>PostgreSQL · SQL</span>
-      <span>REACT</span><span>NEXT.JS</span>
+      <span>Y4 Solutions</span><span>Acessibilidade Digital</span>
       <span>Git · GitHub</span><span>Design Responsivo</span>
     </div>
   </div>
@@ -1438,21 +118,22 @@
         <p class="about-big-text">
           Desenvolvedor <span class="hl">Full Stack</span> apaixonado por construir coisas que importam.
         </p>
-        <p class="about-body">
-          Olá! Sou Pedro Arthur Lysakovski da Silveira, desenvolvedor Full Stack na <strong>Y4 solutions</strong>.
-          Trabalho com o stack completo — desde o back-end até interfaces modernas e intuitivas.
+        <p class="about-body">z
+          Olá! Sou Pedro Arthur Lysakovski da Silveira, desenvolvedor Full Stack na <strong>Y4 Solutions</strong> e
+          recém-formado em Técnico em Informática pelo IFRS campus Osório. Trabalho com o stack completo — desde a
+          lógica do back-end até interfaces modernas e intuitivas.
         </p>
         <p class="about-body">
-          Tenho interesse especial em <strong>desenvolvimento web</strong>, software educacional e acessibilidade
+          Tenho interesse especial em <strong>desenvolvimento web</strong>, software empresarial e acessibilidade
           digital. Acredito que tecnologia deve ser inclusiva e ter impacto positivo na vida real das pessoas.
         </p>
         <p class="about-body">
-          Estou em constante aprendizado, com foco em entregar código de qualidade, soluções que realmente funcionam e
-          experiências que as pessoas adoram usar.
+          Traduzo requisitos complexos em interfaces limpas e código eficiente. Estou em constante aprendizado, com foco
+          em entregar soluções que realmente funcionam.
         </p>
       </div>
       <div class="reveal">
-        <div class="terminal-card">
+        <div class="terminal-card" aria-hidden="true">
           <div class="terminal-header">
             <div class="terminal-dots">
               <div class="dot dot-r"></div>
@@ -1466,21 +147,19 @@
             <div>&nbsp;&nbsp;<span class="t-key">"nome"</span>: <span class="t-str">"Pedro Lysakovski"</span>,</div>
             <div>&nbsp;&nbsp;<span class="t-key">"cargo"</span>: <span class="t-str">"Full Stack Developer"</span>,
             </div>
-            <div>&nbsp;&nbsp;<span class="t-key">"local"</span>: <span class="t-str">"Rio Grande do Sul, BR"</span>,
+            <div>&nbsp;&nbsp;<span class="t-key">"empresa"</span>: <span class="t-str">"Y4 Solutions"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="t-key">"formacao"</span>: <span class="t-str">"Técnico em Informática"</span>,
             </div>
-            <div>&nbsp;&nbsp;<span class="t-key">"instituicao"</span>: <span class="t-str">"IFRS campus Osório"</span>,
+            <div>&nbsp;&nbsp;<span class="t-key">"local"</span>: <span class="t-str">"Rio Grande do Sul, BR"</span>,
             </div>
             <div>&nbsp;&nbsp;<span class="t-key">"idiomas"</span>: [<span class="t-str">"pt-BR"</span>, <span
                 class="t-str">"en"</span>],</div>
             <div>&nbsp;&nbsp;<span class="t-key">"foco"</span>: [</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"web development"</span>,</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"acessibilidade"</span>,</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"software educacional"</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"full-stack development"</span>,</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"Inovação"</span>,</div>
             <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"software empresarial"</span></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"segurança da informação"</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"novas tecnologias"</span></div>
             <div>&nbsp;&nbsp;],</div>
-            <div>&nbsp;&nbsp;<span class="t-key">"disponivel"</span>: <span class="t-avail">true</span>, <span
-                class="t-comment">// aberto a oportunidades</span></div>
             <div>&nbsp;&nbsp;<span class="t-key">"certificados"</span>: <span class="t-num">6</span>,</div>
             <div>&nbsp;&nbsp;<span class="t-key">"projetos"</span>: <span class="t-num">3</span></div>
             <div><span class="t-brace">}</span></div>
@@ -1499,6 +178,7 @@
       </div>
       <div class="skills-grid reveal">
         <div class="skill-block">
+          <span class="skill-count">01</span>
           <span class="skill-block-icon">🖥</span>
           <div class="skill-block-label">// front-end</div>
           <div class="skill-pills">
@@ -1507,29 +187,35 @@
             <span class="pill">JavaScript</span>
             <span class="pill">Flexbox</span>
             <span class="pill">Responsivo</span>
+            <span class="pill">tailwind</span>
             <span class="pill new">React ↑</span>
           </div>
         </div>
         <div class="skill-block">
+          <span class="skill-count">02</span>
           <span class="skill-block-icon">⚙️</span>
           <div class="skill-block-label">// back-end</div>
           <div class="skill-pills">
+            <span class="pill">JavaScript</span>
             <span class="pill">Java</span>
             <span class="pill">POO</span>
-            <span class="pill new">Node.js ↑</span>
+            <span class="pill">Node.js</span>
             <span class="pill new">APIs REST ↑</span>
+            <span class="pill new">TypeScript ↑</span>
           </div>
         </div>
         <div class="skill-block">
+          <span class="skill-count">03</span>
           <span class="skill-block-icon">🗄</span>
           <div class="skill-block-label">// banco de dados</div>
           <div class="skill-pills">
             <span class="pill">SQL</span>
-            <span class="pill new">PostgreSQL ↑</span>
+            <span class="pill">PostgreSQL</span>
             <span class="pill new">MongoDB ↑</span>
           </div>
         </div>
         <div class="skill-block">
+          <span class="skill-count">04</span>
           <span class="skill-block-icon">🛠</span>
           <div class="skill-block-label">// ferramentas</div>
           <div class="skill-pills">
@@ -1537,8 +223,7 @@
             <span class="pill">GitHub</span>
             <span class="pill">Kanban</span>
             <span class="pill">VS Code</span>
-            <span class="pill">PM2</span>
-            <span class="pill">NGINX</span>
+            <span class="pill">Linux</span>
           </div>
         </div>
       </div>
@@ -1555,58 +240,88 @@
       <div class="section-heading">Projetos</div>
     </div>
     <div class="projects-list reveal">
-
-      <a href="https://github.com/plysakovski/Project-Plataforma-educacional-Acessivel" target="_blank"
-        class="project-row">
+      <a href="https://github.com/plysakovski/Sistema-de-Estoque.git" target="_blank" class="project-row">
         <span class="proj-num">001</span>
         <div class="proj-main">
-          <div class="proj-title">Plataforma Educacional Acessível</div>
-          <p class="proj-desc">Projeto desenvolvido no IFRS para apoiar estudantes com necessidades específicas. Foco
-            profundo em acessibilidade digital, semântica HTML e usabilidade inclusiva.</p>
+          <div class="proj-title">Estoque BD_Fields </div>
+          <p class="proj-desc">Prévia funcional de um sistema de gestão de inventário, desenvolvido para operações de
+            campo empresariais.
+            Projetado para funcionar localmente através de um servidor HTTP Python leve, sem dependências externas ou
+            serviços em nuvem.</p>
           <div class="proj-tags">
+            <span class="proj-tag">Full Stack</span>
             <span class="proj-tag">HTML</span>
             <span class="proj-tag">CSS</span>
             <span class="proj-tag">JS</span>
-            <span class="proj-tag">Acessibilidade</span>
-            <span class="proj-tag">IFRS</span>
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">Batchfile</span>
           </div>
         </div>
         <span class="proj-arrow">↗</span>
       </a>
-
-      <a href="https://github.com/plysakovski/JS-Jogo_Da_Memoria.git" target="_blank" class="project-row">
+      <a href="https://sistema-fin-folha.onrender.com/" target="_blank" class="project-row">
         <span class="proj-num">002</span>
         <div class="proj-main">
-          <div class="proj-title">Jogo da Memória em JS</div>
-          <p class="proj-desc">Jogo interativo com animações CSS e lógica JavaScript puro. Manipulação de DOM, estados
-            de jogo e animações de flip construídas do zero.</p>
+          <div class="proj-title">Sistema FinFolha 🍃<span class="proj-featured">destaque</span></div>
+          <p class="proj-desc">FinFolha é uma aplicação web de controle financeiro desenvolvida para simplificar o
+            gerenciamento de receitas e despesas. O sistema oferece uma interface intuitiva e responsiva, permitindo que
+            os usuários acompanhem suas finanças de forma prática em qualquer dispositivo. O projeto foi criado com foco
+            em usabilidade, organização e acessibilidade, ajudando no planejamento financeiro e na tomada de decisões.
+            <br>
+            Teste a aplicação:
+            <br>
+            Email: demofinfolha@gmail.com
+            <br>
+            Senha: finfolha2026
+          </p>
           <div class="proj-tags">
+            <span class="proj-tag">Full Stack</span>
             <span class="proj-tag">JavaScript</span>
             <span class="proj-tag">HTML</span>
             <span class="proj-tag">CSS</span>
-            <span class="proj-tag">DOM</span>
-            <span class="proj-tag">Animações</span>
+            <span class="proj-tag">NODE</span>
+            <span class="proj-tag">Render</span>
+            <span class="proj-tag">Supabase</span>
+            <span class="proj-tag">Resend</span>
           </div>
         </div>
         <span class="proj-arrow">↗</span>
       </a>
-
-      <a href="https://github.com/plysakovski/Projeto-de-Calculadora-Simples.git" target="_blank" class="project-row">
+      <a href="" target="_blank" class="project-row">
         <span class="proj-num">003</span>
         <div class="proj-main">
-          <div class="proj-title">Calculadora — Sistema de Operações</div>
-          <p class="proj-desc">Aplicação JavaScript com design responsivo para operações matemáticas. Lógica de
-            programação robusta e interface limpa, construída como projeto de estudo aprofundado.</p>
+          <div class="proj-title">Sistema de gestão para a PGM de Porto Alegre</div>
+          <p class="proj-desc">
+            Sistema de Gestão Institucional desenvolvido para a Procuradoria-Geral do Município de Porto Alegre (PGM),
+            responsável por centralizar o gerenciamento de processos, carteiras de procuradores, servidores públicos,
+            usuários e permissões de acesso.
+
+            Desenvolvido em React, Node.js e PostgreSQL, o sistema conta com dashboards dinâmicos, relatórios avançados,
+            controle de acesso por perfis e auditoria completa das ações realizadas pelos usuários.
+
+            **Observação:** Por se tratar de uma solução desenvolvida para um órgão público, o <strong>repositório é
+              privado</strong> e
+            não está disponível para visualização pública. Caso tenha interesse em conhecer mais detalhes sobre o
+            projeto, entre em contato.
+
+          </p>
           <div class="proj-tags">
+            <span class="proj-tag">Full Stack</span>
             <span class="proj-tag">JavaScript</span>
             <span class="proj-tag">HTML</span>
             <span class="proj-tag">CSS</span>
-            <span class="proj-tag">Responsivo</span>
+            <span class="proj-tag">Node.js</span>
+            <span class="proj-tag">PostgresSQL</span>
+            <span class="proj-tag">APIs</span>
+            <span class="proj-tag">Controle de Acesso (RBAC)</span>
+            <span class="proj-tag">Auditoria de Logs</span>
+            <span class="proj-tag">Dashboards Analíticos</span>
+            <span class="proj-tag">Relatórios Dinâmicos</span>
+
           </div>
         </div>
         <span class="proj-arrow">↗</span>
       </a>
-
     </div>
   </section>
 
@@ -1618,32 +333,71 @@
         <div class="section-heading">Experiência</div>
       </div>
       <div class="timeline reveal">
-
-        <!-- Item 1 -->
         <div class="exp-date-col">
-          <span class="exp-date">2023 — presente</span>
-          <span class="exp-type">formação técnica</span>
+          <span class="exp-date">2026 — presente</span>
+          <span class="exp-type">emprego atual</span>
         </div>
         <div class="timeline-track"></div>
         <div class="exp-content-col">
-          <div class="exp-role">Estudante Técnico em Informática</div>
+          <div class="exp-role">Desenvolvedor Full Stack</div>
+          <div class="exp-org"><strong>Y4 Solutions</strong> · Rio Grande do Sul, BR</div>
+          <ul class="exp-bullets">
+            <li>Desenvolvimento de soluções web completas — front-end e back-end — em ambiente profissional</li>
+            <li>Trabalho em equipe com foco em entrega de produto de qualidade e prazo</li>
+            <li>Aplicação de boas práticas de código, versionamento com Git e metodologias ágeis</li>
+          </ul>
+        </div>
+        <div class="exp-date-col">
+          <span class="exp-date">2026 — presente</span>
+          <span class="exp-type">emprego atual</span>
+        </div>
+        <div class="timeline-track"></div>
+        <div class="exp-content-col">
+          <div class="exp-role">Técnico em Informática</div>
+          <div class="exp-org"><strong>Nova Ranp LTDA</strong> · Rio Grande do Sul, BR</div>
+          <ul class="exp-bullets">
+            <li>Responsável pelo suporte N1 e N2 para mais de 200 usuários da Equatorial Energia na região do Litoral
+              Norte.</li>
+
+            <li>Realização de instalação, configuração e manutenção de notebooks, desktops, smartphones e periféricos.
+            </li>
+
+            <li>Administração e acompanhamento de chamados utilizando ServiceNow, garantindo cumprimento dos SLAs
+              estabelecidos.</li>
+
+            <li>Gerenciamento de dispositivos móveis corporativos através do Samsung Knox.</li>
+
+            <li>Produção de relatórios técnicos e documentação de procedimentos internos.</li>
+
+            <li>Aplicação de boas práticas de organização de ativos de TI e suporte operacional ao escritório regional.
+            </li>
+          </ul>
+        </div>
+        <div class="exp-date-col">
+          <span class="exp-date">2023 — 2025</span>
+          <span class="exp-type">formação técnica</span>
+        </div>
+        <div class="timeline-track"
+          style="background: linear-gradient(to bottom, rgba(200,255,0,0.4), rgba(200,255,0,0.1));"></div>
+        <div class="exp-content-col">
+          <div class="exp-role">Técnico em Informática <span
+              style="font-size:0.75rem;color:var(--lime);font-family:var(--f-mono);font-weight:400;margin-left:0.5rem;">✓
+              formado</span></div>
           <div class="exp-org"><strong>IFRS campus Osório</strong> · Osório, RS — Presencial</div>
           <ul class="exp-bullets">
-            <li>Formação técnica em programação, redes, banco de dados e desenvolvimento de sistemas</li>
+            <li>Formação completa em programação, redes, banco de dados e desenvolvimento de sistemas</li>
             <li>Desenvolvimento de plataforma educacional acessível para estudantes com necessidades específicas</li>
             <li>Projeto prático com foco em acessibilidade digital e impacto social real</li>
             <li>Trabalho em equipe com metodologias ágeis e Kanban</li>
           </ul>
         </div>
-
-        <!-- Item 2 -->
         <div class="exp-date-col">
           <span class="exp-date">2024</span>
           <span class="exp-type">projetos autorais</span>
         </div>
-        <div class="timeline-track" style="background: linear-gradient(to bottom, rgba(200,255,0,0.3), transparent);">
+        <div class="timeline-track" style="background: linear-gradient(to bottom, rgba(200,255,0,0.15), transparent);">
         </div>
-        <div class="exp-content-col">
+        <div class="exp-content-col" style="padding-bottom:0;">
           <div class="exp-role">Desenvolvedor — Projetos Pessoais</div>
           <div class="exp-org"><strong>Independente</strong> · GitHub</div>
           <ul class="exp-bullets">
@@ -1652,22 +406,6 @@
             <li>Foco em boas práticas, design responsivo e código de qualidade</li>
           </ul>
         </div>
-
-        <!-- Item 3 (próximo passo) -->
-        <div class="exp-date-col">
-          <span class="exp-date" style="color:rgba(200,255,0,0.4);">próximo passo</span>
-          <span class="exp-type">buscando</span>
-        </div>
-        <div class="timeline-track" style="background: transparent;"></div>
-        <div class="exp-content-col" style="padding-bottom:0;">
-          <div class="exp-role" style="color: rgba(255,255,255,0.35);">Estágio em Desenvolvimento de Software</div>
-          <div class="exp-org" style="color: rgba(255,255,255,0.2);">Aberto a oportunidades · RS e remoto</div>
-          <ul class="exp-bullets" style="opacity: 0.35;">
-            <li>Motivado, comprometido e em aprendizado constante</li>
-            <li>Disponível para contribuir em projetos reais com time experiente</li>
-          </ul>
-        </div>
-
       </div>
     </div>
   </div>
@@ -1743,12 +481,12 @@
         <div class="reveal">
           <div class="eyebrow">vamos conversar</div>
           <div class="contact-heading">
-            Aberto a<br>
-            <span class="outline">oportunidades.</span>
+            Vamos<br>
+            <span class="outline">conversar.</span>
           </div>
           <p class="contact-sub">
-            Estou buscando meu primeiro estágio ou oportunidade júnior em desenvolvimento. Se você tem um projeto
-            interessante ou uma vaga, adoraria conversar!
+            Desenvolvedor em atividade na Y4 Solutions, sempre aberto a novas conexões, colaborações e projetos
+            interessantes. Se quiser conversar sobre tecnologia, oportunidades ou parcerias, é só chamar!
           </p>
           <div class="social-list">
             <a href="https://github.com/plysakovski" target="_blank" class="social-item">
@@ -1761,15 +499,15 @@
               <span class="social-handle">linkedin.com/in/plysakovski</span>
               <span class="social-ext">↗</span>
             </a>
-            <a href="https://www.instagram.com/plysakovski_" target="_blank" class="social-item">
+            <a href="https://www.instagram.com/plysakovski.dev" target="_blank" class="social-item">
               <span class="social-code">IG</span>
-              <span class="social-handle">@plysakovski_</span>
+              <span class="social-handle">@plysakovski.dev</span>
               <span class="social-ext">↗</span>
             </a>
           </div>
         </div>
         <div class="reveal">
-          <form class="contact-form" action="https://formspree.io/f/xzzeowlw" method="POST">
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/xzzeowlw" method="POST">
             <div>
               <label class="field-label" for="name">nome</label>
               <input class="field-input" id="name" type="text" name="name" placeholder="Seu nome completo" required>
@@ -1783,7 +521,8 @@
               <textarea class="field-input" id="msg" name="message"
                 placeholder="Me conta sobre a oportunidade ou projeto..." required></textarea>
             </div>
-            <button type="submit" class="btn-lime" style="align-self:flex-start;cursor:none;">enviar mensagem →</button>
+            <div id="formFeedback" style="font-family:var(--f-mono); font-size:0.75rem; margin-top:0.5rem;"></div>
+            <button type="submit" class="btn-lime" style="align-self:flex-start;">enviar mensagem →</button>
           </form>
         </div>
       </div>
@@ -1793,62 +532,12 @@
   <!-- FOOTER -->
   <footer>
     <span class="footer-logo">Pedro<em>.</em></span>
-    <span class="footer-copy">© 2025 Pedro Lysakovski · Feito com código e café · RS, Brasil</span>
+    <span class="footer-made">Desenvolvedor @ <span>Y4 Solutions</span> · RS, Brasil</span>
+    <span class="footer-copy">© 2026 Pedro Lysakovski</span>
   </footer>
 
-  <!-- SCRIPTS -->
-  <script>
-    /* ---------- Custom Cursor ---------- */
-    const dot = document.getElementById('cursorDot');
-    const ring = document.getElementById('cursorRing');
-    const ringEl = document.getElementById('ringEl');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.transform = `translate(${mx}px, ${my}px)`;
-    });
-
-    function lerpCursor() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.transform = `translate(${rx}px, ${ry}px)`;
-      requestAnimationFrame(lerpCursor);
-    }
-    lerpCursor();
-
-    const hoverEls = document.querySelectorAll('a, button, .cert-item, .project-row, .social-item');
-    hoverEls.forEach(el => {
-      el.addEventListener('mouseenter', () => ringEl.classList.add('hover'));
-      el.addEventListener('mouseleave', () => ringEl.classList.remove('hover'));
-    });
-
-    /* ---------- Scroll Reveal ---------- */
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-    revealEls.forEach(el => observer.observe(el));
-
-    /* ---------- Nav active link ---------- */
-    const sections = document.querySelectorAll('section[id], div[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 200) current = s.id;
-      });
-      navLinks.forEach(a => {
-        a.style.color = a.getAttribute('href') === '#' + current
-          ? 'var(--white)' : '';
-      });
-    });
-  </script>
+  <!-- Scripts -->
+  <script src="script.js"></script>
 </body>
 
 </html>
